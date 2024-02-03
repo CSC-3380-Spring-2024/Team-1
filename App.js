@@ -11,6 +11,7 @@ import {
 const TopPalImage = require("./assets/PalBackground.png");
 const PalSiteImage = require("./assets/VisitPalSite.png");
 //const PaldeckImage = require("./assets/Paldeck.jpg");
+//Test edit for updating
 
 const App = () => {
   return (

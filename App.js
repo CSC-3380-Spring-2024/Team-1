@@ -7,7 +7,13 @@ import {
   StatusBar,
   SafeAreaView,
   sticky,
+  Pressable,
 } from "react-native";
+//import Icon from 'react-native-ico-material-design';
+
+
+
+
 const TopPalImage = require("./assets/PalBackground.png");
 const PalSiteImage = require("./assets/VisitPalSite.png");
 //const PaldeckImage = require("./assets/Paldeck.jpg");

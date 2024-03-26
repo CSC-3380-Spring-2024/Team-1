@@ -22,6 +22,7 @@ const pals = () => {
 };
 
 
+
 const styles = StyleSheet.create({
     conatiner: {
         flex: 1,

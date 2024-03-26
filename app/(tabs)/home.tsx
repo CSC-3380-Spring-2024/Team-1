@@ -19,6 +19,7 @@ const SteamImage = require("./assets/Steam.png");
 const XImage = require("./assets/X.png");
 
 
+
 const home = () => {
     return ( 
         <SafeAreaView style={styles.conatiner}>

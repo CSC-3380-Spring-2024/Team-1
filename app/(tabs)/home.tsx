@@ -12,11 +12,11 @@ import React from 'react';
 import { Stack, router, } from "expo-router";
 
 
-const TopPalImage = require("./assets/PalBackground.png");
-const PalSiteImage = require("./assets/VisitPalSite.png");
-const PaldeckImage = require("./assets/Paldeck.png");
-const SteamImage = require("./assets/Steam.png");
-const XImage = require("./assets/X.png");
+const TopPalImage = require("./asset/PalBackground.png");
+const PalSiteImage = require("./asset/VisitPalSite.png");
+const PaldeckImage = require("./asset/Paldeck.png");
+const SteamImage = require("./asset/Steam.png");
+const XImage = require("./asset/X.png");
 
 
 

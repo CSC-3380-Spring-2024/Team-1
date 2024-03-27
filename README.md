@@ -1,4 +1,4 @@
-# Breeding Calculator Page for Palpedia
+# Breeding Calculator Page for Palpedia (Located in ./app/(tabs)/breeding.tsx)
 
 This commit contains the implementation of the basic UI structure along with the functionality of a dropdown menu to select a pal to breed based on its name
 *Next Implementation* Include adding an image of the selected pal in the box immediately after selecting a name

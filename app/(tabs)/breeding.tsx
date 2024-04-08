@@ -9,6 +9,7 @@ import {
     Linking,
     Button,
     Pressable,
+    FlatList,
   } from "react-native";
 import React, { useState } from 'react';
 import { Octicons } from '@expo/vector-icons';
@@ -19,6 +20,7 @@ import { AntDesign, FontAwesome5, FontAwesome, Ionicons, Feather } from '@expo/v
 const palArray = ["Lamball", "Cattiva", "Chikipi", "Lifmunk", "Foxparks", "Fuack", "Sparkit", "Tanzee", "Rooby", "Pengullet", "Penking", "Jolthog", "Jolthog Cryst", "Gumoss", "Flower Gummos", "Vixy", "Hoocrates", "Teafant", "Depresso", "Cremis", "Daedream", "Rushroar", "Nox", "Fuddler", "Killamari", "Mau", "Mau Cryst", "Celaray", "Direwolf", "Tocotoco", "Flopìe", "Mozzarina", "Bristla", "Gobfin", "Gobfin Ignis", "Hagnyu", "Hagnyu Cryst", "Mossanda", "Mossanda Lux", "Woolipop", "Caprity", "Melpaca", "Eikthyrdeer", "Eikthyrdeer Terra", "Nitewing", "Ribbuny", "Incineram", "Incineram Noct", "Cinnamoth", "Arsox", "Dumud", "Cawgnito", "Leezpunk", "Leezpunk Ignis", "Loupmoon", "Galeclaw", "Robinquill", "Robinquill Terra", "Gorirat", "Beegarde", "Elizabee", "Grintale", "Swee", "Sweepa", "Chillet", "Univolt", "Foxcicle", "Pyrin", "Pyrin Noct", "Reindrix", "Rayhound", "Kitsun", "Dazzi", "Lunaris", "Dinossom", "Dinossom Lux", "Surfent", "Surfefnt Terra", "Maraith", "Digtoise", "Tombat", "Lovander", "Flambelle", "Vanwyrm", "Vanwyrm Cryst", "Bushi", "Beakon", "Ragnahawk", "Katress", "Wixen", "Verdash", "Vaelet", "Sibelyx", "Elphidran Aqua", "Elphidran", "Kelpsea", "Kelpsea Ignis", "Azurobe", "Cryolinx", "Blazehowl", "Blazehowl Noct", "Relaxaurus", "Relaxaurus Lux", "Broncherry", "Broncherry Aqua", "Petallia", "Reptyro", "Ice Reptyro", "Kingpaca", "Ice Kingpaca", "Mammorest", "Mammorest Cryst", "Wumpo", "Wumpo Botan", "Warsect", "Fenglope", "Felbat", "Quivern", "Blazamut", "Helzephyr", "Astegon", "Menasting", "Anubis", "Jormuntude", "Jormuntide Ignis", "Suzaku", "Suzaku Aqua", "Grizzbolt", "Lyleen Noct", "Lyleen", "Faleris", "Orserk", "Shadowbeak", "Paladius", "Necromus", "Frostallion", "Frostallion Noct", "Jetragon"]
 var parentOneIndex = -1;
 var parentTwoIndex = -1;
+var desiredPalIndex = -1;
 
 const breeding = () => {
     const BreedingCalcPage = () => 
@@ -30,6 +32,7 @@ const breeding = () => {
             <View style={styles.parentDropdownContainer}>
                 <SelectDropdown 
                     data={palArray}
+                    defaultButtonText="Parent 1"
                     onSelect={(selectedItem, index,) => {
                         parentOneIndex = index;
                         setRefresh(!refresh)
@@ -119,21 +122,138 @@ const breeding = () => {
                 <Octicons style={styles.switchIcon} name="arrow-switch" size={45} color="white"/>
                 <Text style={styles.pressableOptionText2}> Calculate Possible Child! </Text>
             </Pressable>
-            <Text style={styles.textStyle}> Possible Pair page</Text>
+            <ScrollView style={styles.comboScrollViewContainer}>
+                <View style={styles.desiredPalDropdownContainer}>
+                    <SelectDropdown 
+                        data={palArray}
+                        defaultButtonText="Select Desired Pal"
+                        onSelect={(selectedItem, index,) => {
+                            desiredPalIndex = index;
+                            setRefresh(!refresh)
+                        }}
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            // text represented after item is selected
+                            // if data array is an array of objects then return selectedItem.property to render after item is selected
+                            return selectedItem
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            // text represented for each item in dropdown
+                            // if data array is an array of objects then return item.property to represent item in dropdown
+                            return item
+                        }}
+                        buttonStyle={styles.desiredPalDropdown2BtnStyle}
+                        buttonTextStyle={styles.dropdown2BtnTxtStyle}
+                        renderDropdownIcon={isOpened => {
+                        return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={25} />;
+                        }}
+                        dropdownIconPosition={'right'}
+                        dropdownStyle={styles.dropdown2DropdownStyle}
+                        rowStyle={styles.dropdown2RowStyle}
+                        rowTextStyle={styles.dropdown2RowTxtStyle}
+                        selectedRowStyle={styles.dropdown2SelectedRowStyle}
+                        search
+                        searchInputStyle={styles.dropdown2searchInputStyleStyle}
+                        searchPlaceHolder={'Search here'}
+                        searchPlaceHolderColor={'#F8F8F8'}
+                        renderSearchInputLeftIcon={() => {
+                        return <FontAwesome name={'search'} color={'#FFF'} size={18} />;
+                        }}
+                    />
+                </View>
+                <View style={styles.palImageContainer}>
+                    <View style={styles.desiredPalContainer}>
+                        {RenderParentImg(desiredPalIndex)}
+                    </View>
+                </View>
+                <Text style={styles.parentComboTxt}>Parent Combinations:</Text>
+                <View>
+                    {RenderComboList(desiredPalIndex)}
+                </View>
+            </ScrollView>
         </SafeAreaView>
 
-
+    // Array of keys for FlatList
+    //const [palImages, setPalImages] = useState([
+    //   require('./assets/palImages/0.png'), 
+    //   require('./assets/palImages/1.png'), 
+    //require('./assets/palImages/2.png'),
+    //]);
 
     // Function to implement a method that uses the index provided in the pal name array and set it to an image which is then displayed
     // Takes in parameters pareneOneIndex
     type ImageMap = {
         [key: number]: any;
     }
+
+
     const imageMap: ImageMap = {
-        0: require('./assets/palImages/0.png'), 1: require('./assets/palImages/1.png'), 2: require('./assets/palImages/2.png'), //3: require('./assets/palImages/3.png'), 4: require('./assets/palImages/4.png'), 5: require('./assets/palImages/5.png'), 6: require('./assets/palImages/6.png'), 7: require('./assets/palImages/7.png'), 8: require('./assets/palImages/8.png'), 9: require('./assets/palImages/9.png'), 10: require('./assets/palImages/10.png'), 11: require('./assets/palImages/11.png'), 12: require('./assets/palImages/12.png'), 13: require('./assets/palImages/13.png'), 14: require('./assets/palImages/14.png'), 15: require('./assets/palImages/15.png'), 16: require('./assets/palImages/16.png'), 17: require('./assets/palImages/17.png'), 18: require('./assets/palImages/18.png'), 19: require('./assets/palImages/19.png'), 20: require('./assets/palImages/20.png'), 21: require('./assets/palImages/21.png'), 22: require('./assets/palImages/22.png'), 23: require('./assets/palImages/23.png'), 24: require('./assets/palImages/24.png'), 25: require('./assets/palImages/25.png'), 26: require('./assets/palImages/26.png'), 27: require('./assets/palImages/27.png'), 28: require('./assets/palImages/28.png'), 29: require('./assets/palImages/29.png'), 30: require('./assets/palImages/30.png'), 31: require('./assets/palImages/31.png'), 32: require('./assets/palImages/32.png'), 33: require('./assets/palImages/33.png'), 34: require('./assets/palImages/34.png'), 35: require('./assets/palImages/35.png'), 36: require('./assets/palImages/36.png'), 37: require('./assets/palImages/37.png'), 38: require('./assets/palImages/38.png'), 39: require('./assets/palImages/39.png'), 40: require('./assets/palImages/40.png'), 41: require('./assets/palImages/41.png'), 42: require('./assets/palImages/42.png'), 43: require('./assets/palImages/43.png'), 44: require('./assets/palImages/44.png'), 45: require('./assets/palImages/45.png'), 46: require('./assets/palImages/46.png'), 47: require('./assets/palImages/47.png'), 48: require('./assets/palImages/48.png'), 49: require('./assets/palImages/49.png'), 50: require('./assets/palImages/50.png'),
+        0: require('./assets/palImages/0.png'), 1: require('./assets/palImages/1.png'), 2: require('./assets/palImages/2.png'), 23: require('./assets/palImages/23.png'), 17: require('./assets/palImages/17.png'), 13: require('./assets/palImages/13.png'), 
+        3: require('./assets/palImages/3.png'), 15: require('./assets/palImages/15.png'),  //4: require('./assets/palImages/4.png'), 5: require('./assets/palImages/5.png'), 6: require('./assets/palImages/6.png'), 7: require('./assets/palImages/7.png'), 8: require('./assets/palImages/8.png'), 9: require('./assets/palImages/9.png'), 10: require('./assets/palImages/10.png'), 11: require('./assets/palImages/11.png'), 12: require('./assets/palImages/12.png'), 13: require('./assets/palImages/13.png'), 14: require('./assets/palImages/14.png'), 15: require('./assets/palImages/15.png'), 16: require('./assets/palImages/16.png'), 17: require('./assets/palImages/17.png'), 18: require('./assets/palImages/18.png'), 19: require('./assets/palImages/19.png'), 20: require('./assets/palImages/20.png'), 21: require('./assets/palImages/21.png'), 22: require('./assets/palImages/22.png'), 23: require('./assets/palImages/23.png'), 24: require('./assets/palImages/24.png'), 25: require('./assets/palImages/25.png'), 26: require('./assets/palImages/26.png'), 27: require('./assets/palImages/27.png'), 28: require('./assets/palImages/28.png'), 29: require('./assets/palImages/29.png'), 30: require('./assets/palImages/30.png'), 31: require('./assets/palImages/31.png'), 32: require('./assets/palImages/32.png'), 33: require('./assets/palImages/33.png'), 34: require('./assets/palImages/34.png'), 35: require('./assets/palImages/35.png'), 36: require('./assets/palImages/36.png'), 37: require('./assets/palImages/37.png'), 38: require('./assets/palImages/38.png'), 39: require('./assets/palImages/39.png'), 40: require('./assets/palImages/40.png'), 41: require('./assets/palImages/41.png'), 42: require('./assets/palImages/42.png'), 43: require('./assets/palImages/43.png'), 44: require('./assets/palImages/44.png'), 45: require('./assets/palImages/45.png'), 46: require('./assets/palImages/46.png'), 47: require('./assets/palImages/47.png'), 48: require('./assets/palImages/48.png'), 49: require('./assets/palImages/49.png'), 50: require('./assets/palImages/50.png'),
         // 51: require('./assets/palImages/51.png'), 52: require('./assets/palImages/52.png'), 53: require('./assets/palImages/53.png'), 54: require('./assets/palImages/54.png'), 55: require('./assets/palImages/55.png'), 56: require('./assets/palImages/56.png'), 57: require('./assets/palImages/57.png'), 58: require('./assets/palImages/58.png'), 59: require('./assets/palImages/59.png'), 60: require('./assets/palImages/60.png'), 61: require('./assets/palImages/61.png'), 62: require('./assets/palImages/62.png'), 63: require('./assets/palImages/63.png'), 64: require('./assets/palImages/64.png'), 65: require('./assets/palImages/65.png'), 66: require('./assets/palImages/66.png'), 67: require('./assets/palImages/67.png'), 68: require('./assets/palImages/68.png'), 69: require('./assets/palImages/69.png'), 70: require('./assets/palImages/70.png'), 71: require('./assets/palImages/71.png'), 72: require('./assets/palImages/72.png'), 73: require('./assets/palImages/73.png'), 74: require('./assets/palImages/74.png'), 75: require('./assets/palImages/75.png'), 76: require('./assets/palImages/76.png'), 77: require('./assets/palImages/77.png'), 78: require('./assets/palImages/78.png'), 79: require('./assets/palImages/79.png'), 80: require('./assets/palImages/80.png'), 81: require('./assets/palImages/81.png'), 82: require('./assets/palImages/82.png'), 83: require('./assets/palImages/83.png'), 84: require('./assets/palImages/84.png'), 85: require('./assets/palImages/85.png'), 86: require('./assets/palImages/86.png'), 87: require('./assets/palImages/87.png'), 88: require('./assets/palImages/88.png'), 89: require('./assets/palImages/89.png'), 90: require('./assets/palImages/90.png'), 91: require('./assets/palImages/91.png'), 92: require('./assets/palImages/92.png'), 93: require('./assets/palImages/93.png'), 94: require('./assets/palImages/94.png'), 95: require('./assets/palImages/95.png'), 96: require('./assets/palImages/96.png'), 97: require('./assets/palImages/97.png'), 98: require('./assets/palImages/98.png'), 99: require('./assets/palImages/99.png'), 100: require('./assets/palImages/100.png'),
         // 101: require('./assets/palImages/101.png'), 102: require('./assets/palImages/102.png'), 103: require('./assets/palImages/103.png'), 104: require('./assets/palImages/104.png'), 105: require('./assets/palImages/105.png'), 106: require('./assets/palImages/106.png'), 107: require('./assets/palImages/107.png'), 108: require('./assets/palImages/108.png'), 109: require('./assets/palImages/109.png'), 110: require('./assets/palImages/110.png'), 111: require('./assets/palImages/111.png'),
     }
+
+
+    // Function that renders a list of all possible breeding combinations to get a specific pal
+    const RenderComboList = (desiredPalIndex: number) => {
+        // Hardcoded outputs for Lamball and Chickpea
+        // NEEDED FOR DATABASE IMPLEMENTATION
+        // INDEX for both pals on each side of the '+'
+        // Put both values in a map and print output using a for loop for n times (n = number of combos)
+        // May need to do something different for variation of pals
+        const components = [];
+        if (desiredPalIndex == 0) {
+                components.push(    
+                    <View style={styles.parentComboBarContainer}>
+                        <Image source={imageMap[23]} style={styles.comboListLeftImg} />
+                        <AntDesign name={'plus'} color={'#FFF'} size={50} style={styles.comboListPlus}/>
+                        <Image source={imageMap[1]} style={styles.comboListRightImg} />
+                    </View>    
+                );
+                components.push(    
+                    <View style={styles.parentComboBarContainer}>
+                        <Image source={imageMap[23]} style={styles.comboListLeftImg} />
+                        <AntDesign name={'plus'} color={'#FFF'} size={50} style={styles.comboListPlus}/>
+                        <Image source={imageMap[13]} style={styles.comboListRightImg} />
+                    </View>    
+                );
+                components.push(    
+                    <View style={styles.parentComboBarContainer}>
+                        <Image source={imageMap[23]} style={styles.comboListLeftImg} />
+                        <AntDesign name={'plus'} color={'#FFF'} size={50} style={styles.comboListPlus}/>
+                        <Image source={imageMap[17]} style={styles.comboListRightImg} />
+                    </View>    
+                );
+            return components;
+        }
+        if (desiredPalIndex == 1) {
+            components.push(    
+                <View style={styles.parentComboBarContainer}>
+                    <Image source={imageMap[3]} style={styles.comboListLeftImg} />
+                    <AntDesign name={'plus'} color={'#FFF'} size={50} style={styles.comboListPlus}/>
+                    <Image source={imageMap[15]} style={styles.comboListRightImg} />
+                </View>    
+            );
+            components.push(    
+                <View style={styles.parentComboBarContainer}>
+                    <Image source={imageMap[0]} style={styles.comboListLeftImg} />
+                    <AntDesign name={'plus'} color={'#FFF'} size={50} style={styles.comboListPlus}/>
+                    <Image source={imageMap[13]} style={styles.comboListRightImg} />
+                </View>    
+            );
+            components.push(    
+                <View style={styles.parentComboBarContainer}>
+                    <Image source={imageMap[0]} style={styles.comboListLeftImg} />
+                    <AntDesign name={'plus'} color={'#FFF'} size={50} style={styles.comboListPlus}/>
+                    <Image source={imageMap[17]} style={styles.comboListRightImg} />
+                </View>    
+            );
+        return components;
+    }
+        return null;
+    }
+
+
     const RenderParentImg = (parentIndex: number) => {
         const imageSource = imageMap[parentIndex];
         if (parentIndex !== -1) {
@@ -170,12 +290,10 @@ const breeding = () => {
         <SafeAreaView style={styles.conatiner}>
             <StatusBar barStyle="light-content" backgroundColor='#3A3B3C'/>
             <Stack.Screen options={{ header: () => null}}/>
-            <ScrollView style={styles.scrollView}>
-                <Text style={styles.textStyle}>
-                    Welcome to the Palworld Breeding Calculator! 
-                </Text>
-                {renderContent()}
-            </ScrollView>
+            <Text style={styles.textStyle}>
+                Welcome to the Palworld Breeding Calculator! 
+            </Text>
+            {renderContent()}
         </SafeAreaView>
     );
 };
@@ -192,10 +310,6 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 80,
         width: 400
-    },
-    scrollView: {
-        marginHorizontal: 0,
-        marginVertical: 0,
     },
     pressableOption: {
         height: 55, 
@@ -239,6 +353,11 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: '#464040',
     },
+    desiredPalDropdown2BtnStyle: {
+        width: '100%',
+        height: 50,
+        backgroundColor: '#464040',
+    },
     dropdown2BtnTxtStyle: {
         color: 'white',
         textAlign: 'center',
@@ -267,6 +386,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         alignSelf: 'center',
     },
+
 
     // Pal Image Container
     //
@@ -301,6 +421,55 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: '#464040',
     },
-
+    
+    //Possible Combo styles
+    //
+    //
+    comboScrollViewContainer: {
+        backgroundColor: '#272525',
+        marginHorizontal: 0,
+        marginVertical: 0,
+    },
+    desiredPalContainer: {
+        width: '43.3%',
+        height: '100%',
+        marginLeft: 105,
+        backgroundColor: '#464040',
+    },
+    parentComboTxt: {
+        marginTop: 20,
+        color: 'white',
+        fontSize: 25,
+        alignSelf: 'center',
+    },
+    desiredPalDropdownContainer: {
+        height: 50,
+        width: 370,
+        alignSelf: 'center',
+        flexDirection: 'row',
+        marginTop: 30,
+        backgroundColor: "white",
+    },
+    parentComboBarContainer: {
+        height: 100, 
+        width: 370,
+        marginTop: 20,
+        flexDirection: 'row',
+        alignSelf: 'center',
+        backgroundColor: '#464040',
+    },
+    comboListLeftImg: {
+        marginRight: 'auto',
+        width: 100,
+        height: '100%',
+    },
+    comboListRightImg: {
+        marginLeft: 'auto',
+        width: 100,
+        height: '100%',
+    },
+    comboListPlus: {
+        verticalAlign: 'middle',
+    }
 });
 export default breeding;

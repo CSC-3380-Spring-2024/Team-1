@@ -36,7 +36,7 @@ const home = () => {
                 <Stack.Screen options={{ header: () => null}} />
                 <StatusBar barStyle="light-content"/>
               
-                <View style={styles.Rectangle1}>
+                <View style={styles.Rectangle}>
                   <Image
                     source={PalSiteImage}
                     style={styles.boxImage}
@@ -50,7 +50,7 @@ const home = () => {
                 </View>
                 
                 
-                <View style={styles.Rectangle2}>
+                <View style={styles.Rectangle}>
                   <Image
                     source={PaldeckImage}
                     style={styles.boxImage}
@@ -64,7 +64,7 @@ const home = () => {
                 </View>  
                 
                 
-                <View style={styles.Rectangle3}>
+                <View style={styles.Rectangle}>
                   <Image
                     source={SteamImage}
                     style={styles.boxImage}
@@ -77,7 +77,7 @@ const home = () => {
                   </Text>
                 </View>
 
-                <View style={styles.Rectangle3}>
+                <View style={styles.Rectangle}>
                   <Image
                     source={XImage}
                     style={styles.boxImage}
@@ -97,10 +97,9 @@ const home = () => {
 }
 
 const styles = StyleSheet.create({
-    Rectangle1: {
+    Rectangle: {
       height: 150, width: 380, backgroundColor: '#464040', alignSelf: 'center',
       marginTop: 50,
-      marginBottom: 50,
     },
     Rectangle2: {
       height: 150, width: 380, backgroundColor: '#464040', alignSelf: 'center', 
@@ -121,11 +120,32 @@ const styles = StyleSheet.create({
     conatiner: {
       flex: 1,
       marginBottom: 0,
+      backgroundColor: '#272525',
     },
     scrollView: {
-      backgroundColor: '#272525',
-      marginHorizontal: 0,
-      marginVertical: 0,
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
     },
     boxImage: {
       resizeMode: 'cover',

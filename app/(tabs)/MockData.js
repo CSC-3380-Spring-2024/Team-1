@@ -1,0 +1,10 @@
+export const MockData = [{"DeckNumber":10,"name":"Pietrek","element":"Neutral","role":"Farming"},
+{"DeckNumber":2,"name":"Trix","element":"Water","role":"Mining"},
+{"DeckNumber":7,"name":"Tonye","element":"Fire","role":"Lumbering"},
+{"DeckNumber":3,"name":"Emmerich","element":"Grass","role":"Mining"},
+{"DeckNumber":5,"name":"Brooks","element":"Dark","role":"Cooling"},
+{"DeckNumber":6,"name":"Lucille","element":"Ice","role":"Medicine"},
+{"DeckNumber":4,"name":"Sky","element":"Dragon","role":"Farming"},
+{"DeckNumber":8,"name":"Henry","element":"Ground","role":"Lumbering"},
+{"DeckNumber":9,"name":"Adelheid","element":"Electric","role":"Planting"},
+{"DeckNumber":1,"name":"Maurise","element":"Neutral","role":"Farming"}]

@@ -228,6 +228,10 @@ const PossiblePairPage = () => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
+            <Pressable style={styles.pressableOption} onPress={changeContent}>
+                <Octicons style={styles.switchIcon} name="arrow-switch" size={45} color="white"/>
+                <Text style={styles.pressableOptionText1}> Calculate Possible Children! </Text>
+            </Pressable>
             <View style={styles.dropdownContainer}>
                 <SelectDropdown
                     data={parentpalsData.palArray.map((pal) => pal.name)} // Display pal names
@@ -253,13 +257,14 @@ const PossiblePairPage = () => {
                         <View key={index}>
                             <Text>Invalid combination</Text>
                         </View>
-                    );
-                }
-            })
-    ) : (
-        <Text>No combinations available for this pal.</Text>
-    )}
-</View>
+                        );
+                    }
+                    })
+            ) : (
+                <Text>No combinations available for this pal.</Text>
+                )}
+                </View>
+                
         </ScrollView>
     );
 };
@@ -494,11 +499,12 @@ const styles = StyleSheet.create({
     comboListPlus: {
         verticalAlign: 'middle',
     },
+    //Styles for possible pair combo
     container: {
-        flexGrow: 1,
-        backgroundColor: '#fff',
-        paddingVertical: 20,
+        flex: 1,
+        backgroundColor: '#272525',
         paddingHorizontal: 10,
+        paddingTop: 20,
     },
       dropdownContainer: {
         marginBottom: 20,

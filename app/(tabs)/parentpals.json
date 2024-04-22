@@ -1,0 +1,129 @@
+{
+    "palArray": [
+            {"name": "Lamball", "index": 0},
+            {"name": "Cattiva", "index": 1},
+            {"name": "Chikipi", "index": 2},
+            {"name": "Lifmunk", "index": 3},
+            {"name": "Foxparks", "index": 4},
+            {"name": "Fuack", "index": 5},
+            {"name": "Sparkit", "index": 6},
+            {"name": "Tanzee", "index": 7},
+            {"name": "Rooby", "index": 8},
+            {"name": "Pengullet", "index": 9},
+            {"name": "Penking", "index": 10},
+            {"name": "Jolthog", "index": 11},
+            {"name": "Jolthog Cryst", "index": 12},
+            {"name": "Gumoss", "index": 13},
+            {"name": "Flower Gummos", "index": 14},
+            {"name": "Vixy", "index": 15},
+            {"name": "Hoocrates", "index": 16},
+            {"name": "Teafant", "index": 17},
+            {"name": "Depresso", "index": 18},
+            {"name": "Cremis", "index": 19},
+            {"name": "Daedream", "index": 20},
+            {"name": "Rushroar", "index": 21},
+            {"name": "Nox", "index": 22},
+            {"name": "Fuddler", "index": 23},
+            {"name": "Killamari", "index": 24},
+            {"name": "Mau", "index": 25},
+            {"name": "Mau Cryst", "index": 26},
+            {"name": "Celaray", "index": 27},
+            {"name": "Direwolf", "index": 28},
+            {"name": "Tocotoco", "index": 29},
+            {"name": "Flopìe", "index": 30}
+
+    ],
+    "combinations": {
+        "Lamball": [
+            {"left": "Mau", "right": "Cattiva"},
+            {"left": "Mau", "right": "Chikipi"},
+            {"left": "Mau", "right": "Teafant"},
+            {"left": "Mau", "right": "Lamball"},
+            {"left": "Teafant", "right": "Cremis"}
+        ],
+        "Cattiva": [
+            {"left": "Mau", "right": "Mau Cryst"},
+            {"left": "Lifmunk", "right": "Teafant"},
+            {"left": "Lamball", "right": "Vixy"},
+            {"left": "Cattiva", "right": "Cattiva"},
+            {"left": "Cattiva", "right": "Cremis"}
+        ],
+        "Chikipi": [
+            {"left": "Mau Cryst", "right": "Chikipi"}
+        ],
+        "Lifmunk": [
+            {"left": "Mau", "right": "Jolthog"},
+            {"left": "Mau", "right": "Foxparks"},
+            {"left": "Teafant", "right": "Jolthog Cryst"},
+            {"left": "Jolthog", "right": "Chikipi"},
+            {"left": "Foxparks", "right": "Lamball"},
+            {"left": "Lifmunk", "right": "Lifmunk"}
+        ],
+        "Foxparks": [
+            {"left": "Mau Cryst", "right": "Jolthog Cryst"},
+            {"left": "Lifmunk", "right": "Jolthog"},
+            {"left": "Tocotoco", "right": "Cattiva"},
+            {"left": "Tocotoco", "right": "Cremis"},
+            {"left": "Pengullet", "right": "Vixy"},
+            {"left": "Foxparks", "right": "Foxparks"}
+        ],
+        "Fuack": [
+            {"left": "Mau", "right": "Nox"},
+            {"left": "Lifmunk", "right": "Daedream"},
+            {"left": "Jolthog", "right": "Killamari"},
+            {"left": "Mau Cryst", "right": "Fuddler"},
+            {"left": "Depresso", "right": "Flopìe"},
+            {"left": "Fuack", "right": "Fuack"}
+        ],
+        "Sparkit": [
+            {"left": "Mau", "right": "Tocotoco"},
+            {"left": "Mau Cryst", "right": "Depresso"},
+            {"left": "Teafant", "right": "Fuack"},
+            {"left": "Jolthog", "right": "Vixy"},
+            {"left": "Pengullet", "right": "Lamball"},
+            {"left": "Sparkit", "right": "Sparkit"}
+        ],
+        "Tanzee": [
+            {"left": "Mau Cryst", "right": "Celaray"},
+            {"left": "Rushroar", "right": "Jolthog"},
+            {"left": "Rushroar", "right": "Jolthog Cryst"},
+            {"left": "Tocotoco", "right": "Rooby"},
+            {"left": "Pengullet", "right": "Rooby"},
+            {"left": "Tanzee", "right": "Tanzee"}
+        ],
+        "Rooby": [
+            {"left": "Rushroar", "right": "Nox"},
+            {"left": "Direwolf", "right": "Tocotoco"},
+            {"left": "Mau Cryst", "right": "Direwolf"},
+            {"left": "Rooby", "right": "Rooby"}
+        ],
+        "Pengullet": [
+            {"left": "Pengullet", "right": "Pengullet"},
+            {"left": "Mau", "right": "Fuddler"},
+            {"left": "Lifmunk", "right": "Flopìe"},
+            {"left": "Tocotoco", "right": "Jolthog"},
+            {"left": "Teafant", "right": "Fuddler"}
+        ],
+        "10": [],
+        "11": [],
+        "12": [],
+        "13": [],
+        "14": [],
+        "15": [],
+        "16": [],
+        "17": [],
+        "18": [],
+        "19": [],
+        "20": [],
+        "21": [],
+        "22": [],
+        "23": [],
+        "24": [],
+        "25": [],
+        "26": [],
+        "27": [],
+        "28": [],
+        "29": [],
+        "30": []
+    }
+}

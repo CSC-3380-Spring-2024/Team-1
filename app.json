@@ -4,6 +4,10 @@
     "slug": "PalpediaApp",
     "scheme": "PalpediaApp",
     "version": "1.0.0",
+    "sdkVersion": "44.0.0",
+    "navigation": {
+      "useNativeDriver": true
+    },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,6 +15,7 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+      
     },
     "assetBundlePatterns": [
       "**/*"

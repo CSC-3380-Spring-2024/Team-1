@@ -1,8 +1,7 @@
 import * as FileSystem from 'expo-file-system';
-//import SQLite from 'expo-sqlite';
-import * as sqlite from 'expo-sqlite';
+
 import { Asset } from 'expo-asset';
-//import * as SQLite from 'expo-sqlite';
+
 import { MockData } from './MockData';
 import { 
     View,
@@ -21,37 +20,7 @@ import {
 import React, {useState} from 'react';
 import { Stack, router, } from "expo-router";
 import { NavigationContainer } from '@react-navigation/native';
-import * as SQLite from 'expo-sqlite';
-//sqLlite instructions
-const { getDefaultConfig } = require('expo/metro-config');
 
-const defaultConfig = getDefaultConfig(__dirname);
-
-defaultConfig.resolver.assetExts.push('db');
-
-module.exports = defaultConfig;
-//sqlite instructions
-/**const db = SQLite.openDatabase('dbName', version);
-
-const readOnly = true;
-await db.transactionAsync(async tx => {
-  const result = await tx.executeSqlAsync('SELECT COUNT(*) FROM USERS', []);
-  console.log('Count:', result.rows[0]['COUNT(*)']);
-}, readOnly);
-
-async function openDatabase(pathToDatabaseFile: string): Promise<SQLite.WebSQLDatabase> {
-  if (!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + 'SQLite')).exists) {
-    await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'SQLite');
-  }
-  const asset = await Asset.fromModule(require(pathToDatabaseFile)).downloadAsync();
-  await FileSystem.copyAsync({
-    from: asset.localUri,
-    to: FileSystem.documentDirectory + 'SQLite/myDatabaseName.db',
-  });
-  return SQLite.openDatabase('myDatabaseName.db');
-}
-//
-*/
 const pals = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -229,7 +198,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    //marginTop: 22,
   },
   modalView: {
     margin: 20,
@@ -260,13 +229,13 @@ const styles = StyleSheet.create({
   dropdownButton: {
     borderRadius: 10,
     padding: 5,
-    backgroundColor: '#F194FF',
+   // backgroundColor: '#F194FF',
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+   // backgroundColor: '#F194FF',
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+   // backgroundColor: '#2196F3',
   },
   textStyle: {
     color: 'white',
@@ -289,7 +258,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         fontSize: 16,
         borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        //borderBottomColor: '#ccc',
       },
 
     });

@@ -28,7 +28,7 @@ var selectedPal = -1;
 
 
 // Function to implement a method that uses the index provided in the pal name array and set it to an image which is then displayed
-    // Takes in parameters pareneOneIndex
+// Takes in parameters pareneOneIndex
     type ImageMap = {
         [key: number]: any;
     }
@@ -45,6 +45,7 @@ var selectedPal = -1;
 //
 //
 
+//Function uses Palworlds pre-defined algorithm to get resulting Pal index
 const CalcultorFunction = (p1: number, p2: number) => {
     var resultingPalIndex = -1;
     if (p1 != -1 && p2 != -1) { //If Parent 1 and Parent 2 are both chosen
@@ -53,7 +54,6 @@ const CalcultorFunction = (p1: number, p2: number) => {
         const resultingPalPwr = (breedPwr1 + breedPwr2) / 2;
         if (palBreedingValues.includes(resultingPalPwr)) { //Breeding power result is directly found within the array
             resultingPalIndex = palBreedingValues.indexOf(resultingPalPwr);
-            //console.log(resultingPalIndex);
         }
         else{ //Breeding power result is not in array (choose floor of the two numbers) 
             let closestPal = palBreedingValues[0];
@@ -66,17 +66,14 @@ const CalcultorFunction = (p1: number, p2: number) => {
                 }
             }
             resultingPalIndex = palBreedingValues.indexOf(closestPal);
-            //console.log(closestPal)
-            //console.log(resultingPalIndex)
         }
     }
     return resultingPalIndex;
 }
 
+//Renders the image of child pal
 const RenderChildImg = (p1: number, p2: number) => {
     if (p1 != -1 && p2 != -1) {
-        console.log("parent1 = " +  p1)
-        console.log("parent2 = " +  p2)
         const childPalIndex = CalcultorFunction(p1, p2);
         const palName = palArray[childPalIndex]
         const imageSource = imageMap[childPalIndex];
@@ -90,7 +87,7 @@ const RenderChildImg = (p1: number, p2: number) => {
     }
 }
 
-
+//Initial breeding screen
 const breeding = () => {
     const BreedingCalcPage = () => 
         <SafeAreaView style={styles.conatiner}>
@@ -185,6 +182,7 @@ const breeding = () => {
             </View>
         </SafeAreaView>
 
+//Secondary page
 const PossiblePairPage = () => {
 
     interface Pal {
@@ -306,65 +304,68 @@ const PossiblePairPage = () => {
     );
 };
 
-    
+//Loads parent images
+const RenderParentImg = (parentIndex: number) => {
+    const imageSource = imageMap[parentIndex];
+    if (parentIndex !== -1) {
+        console.log("sucess")
+        return  <Image 
+                    source={imageSource}
+                    style={styles.palParentImg}
+                />
 
-    const RenderParentImg = (parentIndex: number) => {
-        const imageSource = imageMap[parentIndex];
-        if (parentIndex !== -1) {
-            console.log("sucess")
-            return  <Image 
-                        source={imageSource}
-                        style={styles.palParentImg}
-                    />
-
-        }
-        return null;
     }
-    const RenderComboImg = (parentIndex: number) => {
-        const imageSource = imageMap[parentIndex];
-        if (parentIndex !== -1) {
-            console.log("sucess")
-            return  <Image 
-                        source={imageSource}
-                        style={styles.palCombo}
-                    />
+    return null;
+}
 
-        }
-        return null;
+//Loads image of selected pal for possible combo page
+const RenderComboImg = (parentIndex: number) => {
+    const imageSource = imageMap[parentIndex];
+    if (parentIndex !== -1) {
+        return  <Image 
+                    source={imageSource}
+                    style={styles.palCombo}
+                />
+
     }
-    // Function to refresh the blank box components after selecting a pal name (Used in onSelect())
-    const [refresh, setRefresh] = useState<boolean>(false);
+    return null;
+}
 
-    // Function to render between the breeding calculator page and the possible parent page
-    const [content, setContent] = useState(1);
+// Function to refresh the blank box components after selecting a pal name (Used in onSelect())
+const [refresh, setRefresh] = useState<boolean>(false);
 
-    const renderContent = () => {
-        switch (content) {
-            case 1:
-                return <BreedingCalcPage />;
-            case 2:
-                return <PossiblePairPage />;
-            default:
-                return null;
-        }
+// Function to render between the breeding calculator page and the possible parent page
+const [content, setContent] = useState(1);
+
+//Function to render pages
+const renderContent = () => {
+    switch (content) {
+        case 1:
+            return <BreedingCalcPage />;
+        case 2:
+            return <PossiblePairPage />;
+        default:
+            return null;
     }
+}
 
-    const changeContent = () => {
-        setContent((prevContent) => (prevContent === 2 ? 1 : prevContent + 1))
-    }
+const changeContent = () => {
+    setContent((prevContent) => (prevContent === 2 ? 1 : prevContent + 1))
+}
 
-    return ( 
-        <SafeAreaView style={styles.conatiner}>
-            <StatusBar barStyle="light-content" backgroundColor='#3A3B3C'/>
-            <Stack.Screen options={{ header: () => null}}/>
-            <Text style={styles.textStyle}>
-                Welcome to the Palworld Breeding Calculator! 
-            </Text>
-            {renderContent()}
-        </SafeAreaView>
-    );
+return ( 
+    <SafeAreaView style={styles.conatiner}>
+        <StatusBar barStyle="light-content" backgroundColor='#3A3B3C'/>
+        <Stack.Screen options={{ header: () => null}}/>
+        <Text style={styles.textStyle}>
+            Welcome to the Palworld Breeding Calculator! 
+        </Text>
+        {renderContent()}
+    </SafeAreaView>
+);
 };
 
+//Styling
 const styles = StyleSheet.create({
     conatiner: {
         flex: 1,

@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#272525',
   },
   dropdownButton: {
     width: 200,
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+    marginTop: 22,
   },
   dropdown: {
     width: 200,

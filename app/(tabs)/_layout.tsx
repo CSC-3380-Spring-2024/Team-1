@@ -13,7 +13,6 @@ export default () => {
                 }
             }}
         >
-            
             <Tabs.Screen 
                 name="home" 
                 options={{
